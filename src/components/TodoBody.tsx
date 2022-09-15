@@ -7,20 +7,17 @@ import { MdAddCircleOutline } from 'react-icons/md';
 //spinner-bg
 import spinner from '../assets/spinner.gif';
 
-export interface TodoBodyProps {
-  item: GetPayload;
-}
 const TodoBody = () => {
   const dispatch = useAppDispatch();
   const { loading, todoList } = useTodoSlice();
-  const [todoTitle, setTodoTitle] = useState<string>('');
+  const [todoTitle, setTodoTitle] = useState('');
   const todoOrder = new Date().getTime();
 
-  const todoTitleHandler: React.ChangeEventHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const todoTitleHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTodoTitle(e.currentTarget.value);
   };
 
-  const makeTodoItemHandler: React.FormEventHandler = (e: React.FormEvent<HTMLFormElement>) => {
+  const makeTodoItemHandler = (e: React.FormEvent<HTMLFormElement>) => {
     if (todoTitle.trim().length < 2) {
       alert('2글자 이상 입력 해 주세영!');
       return;

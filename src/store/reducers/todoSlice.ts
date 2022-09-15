@@ -5,7 +5,7 @@ import { getTodo, createTodo, deleteTodo, editTodo } from '../api/todoApi';
 import { GetPayload } from '../api/todoApi';
 interface TodoType {
   loading: 'nomal' | 'pending' | 'success' | 'failed';
-  todoList: Array<GetPayload>;
+  todoList: GetPayload[];
 }
 
 const initialState: TodoType = {
@@ -22,7 +22,7 @@ const todoSlice = createSlice({
     builder.addCase(getTodo.pending, (state) => {
       state.loading = 'pending';
     });
-    builder.addCase(getTodo.fulfilled, (state, action: PayloadAction<Array<GetPayload>>) => {
+    builder.addCase(getTodo.fulfilled, (state, action: PayloadAction<GetPayload[]>) => {
       state.loading = 'success';
       state.todoList = action.payload;
     });

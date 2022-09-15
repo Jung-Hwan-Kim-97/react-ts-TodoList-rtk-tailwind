@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { TodoBodyProps } from './TodoBody';
-import { deleteTodo, getTodo, editTodo } from '../store/api/todoApi';
+// import { TodoBodyProps } from './TodoBody';
+import { deleteTodo, getTodo, editTodo, GetPayload } from '../store/api/todoApi';
 import { useAppDispatch } from '../store/hooks';
 //react-icons
 import { AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai';
@@ -9,16 +9,20 @@ import { MdOutlineCancel } from 'react-icons/md';
 //dayjs
 import dayjs from 'dayjs';
 
+export interface TodoBodyProps {
+  item: GetPayload;
+}
+
 const TodoItem = ({ item }: TodoBodyProps) => {
-  const [isEditMode, setIsEditMode] = useState<boolean>(false);
-  const [editTodoContent, setEditTodoContent] = useState<string>('');
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [editTodoContent, setEditTodoContent] = useState('');
   const dispatch = useAppDispatch();
 
-  const todoModeHandler: React.MouseEventHandler = () => {
+  const todoModeHandler = () => {
     setIsEditMode(!isEditMode);
   };
 
-  const saveEditedTodoHandler: React.MouseEventHandler = () => {
+  const saveEditedTodoHandler = () => {
     if (editTodoContent.trim().length < 2) {
       alert('2글자 이상 입력 해 주세영!');
       return;
@@ -52,8 +56,8 @@ const TodoItem = ({ item }: TodoBodyProps) => {
     }
   };
 
-  const createTodoTime: string = dayjs(item.createdAt).format('YY년 MM월 DD일 HH시 mm분');
-  const updateTodoTime: string = dayjs(item.updatedAt).format('YY년 MM월 DD일 HH시 mm분');
+  const createTodoTime = dayjs(item.createdAt).format('YY년 MM월 DD일 HH시 mm분');
+  const updateTodoTime = dayjs(item.updatedAt).format('YY년 MM월 DD일 HH시 mm분');
 
   return (
     <>
